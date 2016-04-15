@@ -1,0 +1,15 @@
+version: "2"
+services:
+  backup:
+      build: .
+      image: apsl/gce-disk-snapshot
+      environment:
+          GCLOUD_EMAIL_SERVICE_ACCOUNT: backup-disks@project-name.iam.gserviceaccount.com
+          GCLOUD_KEY_FILE: filekey-123840293.json
+          GCLOUD_PROJECT: project-name
+          SNAPSHOT_DISK: disk-name
+          SNAPSHOT_ZONE: europe-west1-b
+          SNAPSHOT_RETENTION: 30
+      volumes:
+          - ./keys:/keys 
+          - ./status:/status
